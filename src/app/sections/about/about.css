@@ -1,0 +1,55 @@
+.about-section {
+  padding: 100px 0;
+  background: #0f172a;
+  color: white;
+}
+
+.section-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 50px;
+}
+
+.about-card {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-text {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: #cbd5e1;
+  margin-bottom: 20px;
+}
+
+.about-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.highlight-item {
+  background: rgba(255, 255, 255, 0.05);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 16px;
+
+  padding: 25px;
+
+  text-align: center;
+}
+
+.highlight-item span {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.highlight-item p {
+  margin: 0;
+  color: #cbd5e1;
+}
