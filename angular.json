@@ -6,40 +6,42 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "amarou-dev": {
+    "portfolio-amado-microfront": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
+      "schematics": {},
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "."
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "src/styles.css"
             ],
-            "server": "src/main.server.ts",
-            "outputMode": "server",
-            "security": {
-              "allowedHosts": []
+            "main": "src/main.ts",
+            "outputPath": "dist/portfolio-amado-microfront",
+            "index": "src\\index.html",
+            "customWebpackConfig": {
+              "path": "webpack.config.js"
             },
-            "ssr": {
-              "entry": "src/server.ts"
-            }
+            "commonChunk": false,
+            "extractLicenses": false
           },
           "configurations": {
             "production": {
@@ -55,7 +57,10 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "customWebpackConfig": {
+                "path": "webpack.prod.config.js"
+              }
             },
             "development": {
               "optimization": false,
@@ -66,16 +71,23 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-builders/custom-webpack:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "amarou-dev:build:production"
+              "buildTarget": "portfolio-amado-microfront:build:production"
             },
             "development": {
-              "buildTarget": "amarou-dev:build:development"
+              "buildTarget": "portfolio-amado-microfront:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200,
+            "publicHost": "http://localhost:4200",
+            "headers": {
+              "Access-Control-Allow-Origin": "*"
+            }
+          }
         },
         "test": {
           "builder": "@angular/build:unit-test"
